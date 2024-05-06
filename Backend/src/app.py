@@ -67,5 +67,4 @@ def recommend_movies_route(): #handling POST requests to the api
         return jsonify({'message': 'No recommendations available!!!'}), 404
 
 if __name__ == "__main__":
-   # app.run(port=8000,debug=True)
-    uvicorn.run('app:app', host='0.0.0.0', port='8000', reload=True)
+   app.run(port=8000,debug=True)
