@@ -34,14 +34,16 @@ function Chat({ chatId }: Props) {
       {messages?.empty && (
         <>
           <p className="pt-10 text-center text-black font-extrabold">
-            Enter A Prompt To Start Chatting 🧠 {/*if there is no message prompt the user to send something*/}
+            Enter A Prompt To Start Chatting 🧠{" "}
+            {/*if there is no message prompt the user to send something*/}
           </p>
           <ChevronDoubleDownIcon className="h-10 w-10 mx-auto mt-5 text-white animate-bounce" />
         </>
       )}
       {messages?.docs.map((message) => (
         <div key={message.id} className="bg-[#ffffffc5]/60 font-medium">
-          <Message key={message.id} message={message.data()} />  {/* IF there is a message in the DB then display that text */}
+          <Message key={message.id} message={message.data()} />{" "}
+          {/* IF there is a message in the DB then display that text */}
         </div>
       ))}
     </div>

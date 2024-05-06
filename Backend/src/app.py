@@ -47,7 +47,7 @@ def recommend_movies_route(): #handling POST requests to the api
         return jsonify({'error': 'User input is required'}), 400
 
     cwd = os.getcwd()
-    pathname = os.path.join(cwd, 'Backend/flaskapi/titles.csv') #assign the dataset path to pathname to be used by the program
+    pathname = os.path.join(cwd, 'Backend/src/titles.csv') #assign the dataset path to pathname to be used by the program
     movies_data = load_films(pathname)
     if movies_data is None:
         return jsonify({'error': 'Failed to load movies data'}), 500

@@ -39,9 +39,7 @@ export default async function RootLayout({
           ) : (
             <div className="flex">
               <ClientProvider />
-              <div className="flex-1 bg-[#92afc4ec]">
-                {children}
-              </div>
+              <div className="flex-1 bg-[#92afc4ec]">{children}</div>
             </div>
           )}
         </SessionProvider>

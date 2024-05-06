@@ -15,11 +15,13 @@ function Emotionres({ emotionDetection }: Props) {
   const isUser = emotionDetection.user.name != "RealAI";
 
   const [recommendations, setRecommendations] = useState<any[]>([]);
-  
+
   useEffect(() => {
-    async function fetchMovie() { 
+    async function fetchMovie() {
       try {
-        const notification = toast.loading("Looking for movies...", { id: "reposeDataRecommendation" } );
+        const notification = toast.loading("Looking for movies...", {
+          id: "reposeDataRecommendation",
+        });
         const response = await recquery(emotionDetection.text); //for the movies the response from the huggingface emotion detection model is being passed into the query. movies will be recommended based on the users detected emotion
         setRecommendations(response);
         toast.success("Responded! ", { id: "reposeDataRecommendation" });

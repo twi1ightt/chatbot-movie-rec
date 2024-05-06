@@ -51,7 +51,8 @@ function EmotionInput({ inputId }: Props) {
       emotionDetection
     );
 
-    await fetch(`/api/route`, { //sending user input to hugging face model
+    await fetch(`/api/route`, {
+      //sending user input to hugging face model
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -4,7 +4,7 @@ import RecSideBar from "../../components/rec/RecSideBar";
 export default function layout({
   children,
 }: Readonly<{
-  children: React.ReactNode; 
+  children: React.ReactNode;
 }>) {
   return (
     <div className="flex">

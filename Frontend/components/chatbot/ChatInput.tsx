@@ -16,13 +16,14 @@ function ChatInput({ chatId }: Props) {
   const { data: session } = useSession();
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (!prompt) return;
 
     const input = prompt.trim();
-    setPrompt("");//set the input to the text given by user
+    setPrompt(""); //set the input to the text given by user
 
-    const message: Message = { //this is how messages from both the user and model will be stored in the database
+    const message: Message = {
+      //this is how messages from both the user and model will be stored in the database
       text: input,
       createdAt: serverTimestamp(),
       user: {
@@ -49,7 +50,8 @@ function ChatInput({ chatId }: Props) {
       message //add the message taken in from the input to the database
     );
 
-    await fetch(`/api/askQuestion`, { //send that same message to the api to get a response from the model
+    await fetch(`/api/askQuestion`, {
+      //send that same message to the api to get a response from the model
       method: "POST",
       headers: {
         "Content-Type": "application/json",
