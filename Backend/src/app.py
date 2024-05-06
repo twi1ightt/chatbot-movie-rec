@@ -4,7 +4,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import uvicorn
 
 app = Flask(__name__) #initialise a flask application 
 CORS(app) #enable Cross-Origin Resource Sharing to allow requests from different browsers
