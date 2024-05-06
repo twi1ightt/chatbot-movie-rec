@@ -4,6 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import uvicorn
 
 app = Flask(__name__) #initialise a flask application 
 CORS(app) #enable Cross-Origin Resource Sharing to allow requests from different browsers
@@ -66,4 +67,5 @@ def recommend_movies_route(): #handling POST requests to the api
         return jsonify({'message': 'No recommendations available!!!'}), 404
 
 if __name__ == "__main__":
-    app.run(port=8000,debug=True)
+   # app.run(port=8000,debug=True)
+    uvicorn.run('app:app', host='0.0.0.0', port='8000', reload=True)
