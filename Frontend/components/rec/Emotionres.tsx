@@ -50,7 +50,7 @@ function Emotionres({ emotionDetection }: Props) {
         <div className="flex flex-col">
           <div className={` order-1 mb-2}`}>
             {/* first display the emotions detected from user input */}
-            <p className="pt-1 text-xl">{emotionDetection.text}</p> cdcd
+            <p className="pt-1 text-xl">{emotionDetection.text}</p>
           </div>
           <div
             className={`${modelText && "border border-black/10 p-5"} order-2`}
