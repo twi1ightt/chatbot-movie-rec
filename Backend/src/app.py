@@ -63,7 +63,7 @@ def recommend_movies_route(): #handling POST requests to the api
     if recommended_movies is not None:
         return jsonify(recommended_movies)
     else:
-        return jsonify({'message': 'No recommendations available'}), 404
+        return jsonify({'message': 'No recommendations available!!!'}), 404
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8000,debug=True)
