@@ -1,4 +1,4 @@
-
+//calling the movie recommendation api made in the backend folder
 const recquery = async (stringInput: string) => {
   const recresponse = await fetch("http://127.0.0.1:5000/recommend-movies", {
     headers: {
@@ -9,13 +9,10 @@ const recquery = async (stringInput: string) => {
   });
   const recommendation = await recresponse.json();
 
-  const movieDetails = recommendation.map((movie: Movie) => ({
-    title: movie.title,
-    genres: movie.genres,
-    description: movie.description,
-    type: movie.type
-  }));
-
+  // const movieDetails = recommendation.map((movie: Movie) => ({
+  //   title: movie.Series_Title,
+  //   genres: movie.Genre,
+  //   description: movie.Overview,
 
   return recommendation;
 };

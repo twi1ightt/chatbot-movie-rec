@@ -9,13 +9,15 @@ function Login() {
         onClick={() => signIn("google")}
         className="text-black text-3xl animate-pulse"
       >
-      <Image
-        alt="logo"
-        src="/logotext.png"
-        width={300}
-        height={300}
-        className="rounded-2xl m-4"
-      />
+        <Image
+          alt="logo"
+          src="/logotext.png"
+          width={300}
+          height={300}
+          style={{ width: 300, height: "auto" }}
+          className="rounded-2xl m-4"
+          priority
+        />
         {/* Sign In to use RealAI */}
       </button>
     </div>

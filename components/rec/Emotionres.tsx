@@ -12,20 +12,22 @@ type Props = {
 function Emotionres({ emotionDetection }: Props) {
   const modelText =
     emotionDetection.user.name === "RealAI" ? emotionDetection.text : null;
-  // const notification = toast.loading("Looking for movies...");
-  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const isUser = emotionDetection.user.name != "RealAI";
 
+  const [recommendations, setRecommendations] = useState<any[]>([]);
+  
   useEffect(() => {
-    async function fetchMovie() {
+    async function fetchMovie() { 
       try {
-        const response = await recquery(emotionDetection.text);
+        const notification = toast.loading("Looking for movies...", { id: "reposeDataRecommendation" } );
+        const response = await recquery(emotionDetection.text); //for the movies the response from the huggingface emotion detection model is being passed into the query. movies will be recommended based on the users detected emotion
         setRecommendations(response);
         toast.success("Responded! ", { id: "reposeDataRecommendation" });
       } catch (error) {
         toast.error("Error fetching recommendations", {
           id: "reposeDataRecommendation",
         });
-        console.error("Error:", error);
+        console.error("Error:", error); //
       }
     }
     fetchMovie();
@@ -33,8 +35,8 @@ function Emotionres({ emotionDetection }: Props) {
 
   return (
     <div
-      className={`py-5 text-black ${
-        modelText && "bg-[#e6e7ee]/60"
+      className={`py-5 text-black ${modelText && "bg-[#e6e7ee]/60 order-1"} ${
+        isUser && "order-2"
       } hover:bg-[#e6e7ee]`}
     >
       <div className="flex flex-row space-x-5 px-10 max-w-2xl mx-auto">
@@ -45,54 +47,65 @@ function Emotionres({ emotionDetection }: Props) {
         />
         <div className="flex flex-col">
           <div className={` order-1 mb-2}`}>
-            <p className="pt-1 text-xl">{emotionDetection.text}</p>
+            {/* first display the emotions detected from user input */}
+            <p className="pt-1 text-xl">{emotionDetection.text}</p> cdcd
           </div>
           <div
             className={`${modelText && "border border-black/10 p-5"} order-2`}
           >
             {recommendations.length > 0 && modelText && (
-              <>
-                <p className="pt-1 text-2xl font-extrabold underline">
-                  Some Movies Based On Your Emotion:
-                </p>
-                <p className="pt-1 text-sm">
-                  <>
+              <div>
+                <div>
+                  {/* Display the movies recived from python backend to the user */}
+                  <p className="pt-1 text-2xl font-extrabold underline">
+                    Some Movies Based On Your Emotion:
+                  </p>
+                </div>
+                <div className="pt-1 text-sm">
+                  <div>
                     {recommendations.map((movie) => (
-                      <>
-                        <p
-                          className="text-slate-900 text-xl font-semibold animate-slidein"
-                          key={movie.Series_Title}
-                        >
-                          {`
-                      - Title :  ${movie.Series_Title} \n
-                        `}
-                        </p>
+                      <div key={movie.id}>
+                        <div>
+                          <p className="text-slate-900 text-xl font-semibold animate-slidein">
+                            {`- Title :  ${movie.title} \n`}
+                          </p>
+                        </div>
                         <br />
-                        <p key={movie.Genre} className="text-xl animate-slidein500">
-                          {"\xa0\xa0\xa0\xa0\xa0\xa0\xa0" +
-                            `
-                      - Genre :  ${movie.Genre} \n
-                        `}
-                        </p>
+                        <div>
+                          <p
+                            key={movie.genres}
+                            className="text-xl animate-slidein500"
+                          >
+                            {"\xa0\xa0\xa0\xa0\xa0\xa0\xa0" +
+                              ` - Genre :  ${movie.genres} \n`}
+                          </p>
+                        </div>
                         <br />
-                        <p key={movie.Overview} className="text-xl animate-slidein700">
-                          {"\xa0\xa0\xa0\xa0\xa0\xa0\xa0" +
-                            `
-                      - OverView :  ${movie.Overview} 
-                        `}
-                        </p>
+                        <div>
+                          <p
+                            key={movie.description}
+                            className="text-xl animate-slidein700"
+                          >
+                            {"\xa0\xa0\xa0\xa0\xa0\xa0\xa0" +
+                              ` - OverView :  ${movie.description} `}
+                          </p>
+                        </div>
                         <br />
-                        {/* <p key={movie.type} className="text-xl">
-                          {`\xa0\xa0\xa0\xa0\xa0\xa0\xa0` +
-                            `- Movie or Show? :  ${movie.type.toLowerCase()} \n
-                        `}
-                        </p> */}
+                        <div>
+                          <p
+                            key={movie.type}
+                            className="text-xl animate-slidein900"
+                          >
+                            {"\xa0\xa0\xa0\xa0\xa0\xa0\xa0" +
+                              ` - Type :  ${movie.type} `}
+                          </p>
+                        </div>
                         <br />
-                      </>
+                      </div>
                     ))}
-                  </>
-                </p>
-              </>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>

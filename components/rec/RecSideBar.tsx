@@ -29,7 +29,9 @@ function RecSideBar() {
               src="/logoicon.png"
               alt="logo"
               width={70}
-              height={70}
+              height={65}
+              style={{ width: 70, height: 65 }}
+              priority
               sizes="100vw"
             />
           </div>

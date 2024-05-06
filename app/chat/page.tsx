@@ -4,6 +4,7 @@ import {
   LightBulbIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { auto } from "openai/_shims/registry.mjs";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,9 @@ export default function HomePage() {
           alt="logo"
           width={300}
           height={300}
+          style={{width: 300, height: "auto"}}
           sizes="100vw"
+          priority
         />
       </div>
 

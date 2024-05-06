@@ -11,7 +11,7 @@ type Props = {
   inputId: string;
 };
 
-function ModelInterface({ inputId }: Props) { 
+function ModelInterface({ inputId }: Props) {
   const { data: session } = useSession();
 
   const [modelResponse] = useCollection(
@@ -33,14 +33,9 @@ function ModelInterface({ inputId }: Props) {
         </>
       )}
       {modelResponse?.docs.map((emotionDetection) => (
-        <>
-          <div className="bg-[#cdbcbcc5] font-medium">
-            <Emotionres
-              key={emotionDetection.id}
-              emotionDetection={emotionDetection.data()}
-            />
-          </div>
-        </>
+        <div key={emotionDetection.id} className="bg-[#cdbcbcc5] font-medium">
+          <Emotionres emotionDetection={emotionDetection.data()} />
+        </div>
       ))}
     </div>
   );

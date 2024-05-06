@@ -6,7 +6,14 @@ function page() {
   return (
     <div className="flex flex-col items-center justify-center h-screen px-2 text-white">
       <div>
-        <Image src="/logotext.png" alt="logo" width={300} height={10} />
+        <Image
+          src="/logotext.png"
+          alt="logo"
+          width={300}
+          height={300}
+          style={{width: 300, height: "auto"}}
+          priority
+        />
       </div>
       <div className=" md:grid-cols-3 gap-4 text-black">
         <div className="card rounded-lg shadow-md p-4 bg-[#e6e7ee]">
@@ -17,7 +24,9 @@ function page() {
             Recommendations
           </h2>
           <ul key={"InfoCard"} className="list-disc space-y-2 pl-4">
-            <li key={"infoCardText"}>Get Movie And TV suggestions Based On Your Emotion</li>
+            <li key={"infoCardText"}>
+              Get Movie And TV suggestions Based On Your Emotion
+            </li>
           </ul>
         </div>
       </div>

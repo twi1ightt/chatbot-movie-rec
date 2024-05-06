@@ -12,17 +12,17 @@ type Props = {
 };
 
 function ChatInput({ chatId }: Props) {
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState(""); //proompt wil be empty in a new chat
   const { data: session } = useSession();
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); 
     if (!prompt) return;
 
     const input = prompt.trim();
-    setPrompt("");
+    setPrompt("");//set the input to the text given by user
 
-    const message: Message = {
+    const message: Message = { //this is how messages from both the user and model will be stored in the database
       text: input,
       createdAt: serverTimestamp(),
       user: {
@@ -46,10 +46,10 @@ function ChatInput({ chatId }: Props) {
         chatId,
         "messages"
       ),
-      message
+      message //add the message taken in from the input to the database
     );
 
-    await fetch(`/api/askQuestion`, {
+    await fetch(`/api/askQuestion`, { //send that same message to the api to get a response from the model
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,9 +74,10 @@ function ChatInput({ chatId }: Props) {
           className="focus:outline-none bg-transparent flex-1 disabled:cursor-not-allowed 
           disabled:text-gray-300 text-lg border-2 border-spacing-4 border-slate-900/15 hover:border-slate-900/40 rounded-xl font-semibold resize-none p-3"
           value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
+          onChange={(e) => setPrompt(e.target.value)} //eventhandler to make use of the user input
           placeholder="Enter Prompt"
           disabled={!session}
+          id="chatTextInput"
         />
 
         <button

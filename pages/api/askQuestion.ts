@@ -40,7 +40,7 @@ export default async function handler(
     .collection("chats")
     .doc(chatId)
     .collection("messages")
-    .add(message);
+    .add(message); //create a message document in database and model response there
 
   res.status(200).json({ answer: message.text });
 }

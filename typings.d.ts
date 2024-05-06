@@ -19,9 +19,9 @@ interface emotionDetection {
 }
 
 interface Movie {
-  Series_Title: string;
-  Genre: string;
-  Overview: string;
+  title: string;
+  genres: string;
+  description: string;
   type: string;
 }
 

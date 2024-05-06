@@ -4,7 +4,11 @@ const emotionquery = async (input: string, inputId: string) => {
 
   const emotionResponse = await fetch(
     //async api post request to the url below
-    //"https://api-inference.huggingface.co/models/SamLowe/roberta-base-go_emotions", // model thats to be used for emotion detection
+    
+    // models that can be used for emotion detection
+    //just comment the one in use and uncomment this one to compare them.
+    //"https://api-inference.huggingface.co/models/SamLowe/roberta-base-go_emotions", 
+
     "https://api-inference.huggingface.co/models/bdotloh/distilbert-base-uncased-empathetic-dialogues-context",
     {
       headers: {
@@ -16,19 +20,17 @@ const emotionquery = async (input: string, inputId: string) => {
     }
   );
   const emotion = await emotionResponse.json(); // wait for request to be completed then parse the json data in the response
-    (a: { score: number }, b: { score: number }) => b.score - a.score
-  emotion.sort(
-  ); // sorting the emotion array
+  const compareScores = (a: { score: number }, b: { score: number }) => b.score - a.score; // sorting the emotion array
+  emotion.sort(compareScores);
 
-  const top5 = emotion.slice(0, 5);
-  const emotionLabels = top5.map((emotion: { label: any }) => emotion.label);
+  const top5 = emotion.slice(0, 5); //return only the top 5 emotions
   const dominantEmotion = top5[0].label;
-  let modelresponse = `You seem to be feeling ${dominantEmotion} with hints of `;
+  let modelresponse = `You seem to be feeling ${dominantEmotion} with hints of `; //just formatting the response from the api
 
   for (let i = 1; i < top5.length; i++) {
     const allEmotion = top5[i].label;
-    modelresponse += `${allEmotion}, `;
-  }
+    modelresponse += `${allEmotion}, `; 
+  } 
   return modelresponse;
 };
 
